@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello, CSL</title>
     <style>
         body {
@@ -20,11 +20,28 @@
 <body>
     <h1>Hello, World Popup</h1>
     <button onclick="showHelloPopup()">Click me!</button>
+    <!-- 添加文件上传按钮 -->
+    <input type="file" id="fileInput" style="display: none;" accept=".xlsx">
+    <button onclick="uploadExcel()">Upload Excel File</button>
 
     <script>
         function showHelloPopup() {
             alert('Hello, World!');
         }
+
+        function uploadExcel() {
+            // 触发文件上传按钮的点击事件
+            document.getElementById('fileInput').click();
+        }
+
+        // 当用户选择文件后，执行这个函数
+        document.getElementById('fileInput').addEventListener('change', function() {
+            var file = this.files[0]; // 获取用户选择的文件
+            if (file) {
+                // 这里可以使用 FileReader 对象来读取文件内容，然后进行相应的操作
+                alert('Selected file: ' + file.name);
+            }
+        });
     </script>
 </body>
 </html>
