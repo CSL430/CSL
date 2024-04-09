@@ -1,0 +1,40 @@
+using System;
+using System.Windows.Forms;
+using Microsoft.Office.Interop.Excel;
+
+namespace ExcelFileUploader
+{
+    public partial class MainForm : Form
+    {
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+
+        private void showHelloPopupButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Hello, World!");
+        }
+
+        private void uploadExcelButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
+            openFileDialog.Title = "Select an Excel File";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFile = openFileDialog.FileName;
+                MessageBox.Show("Selected file: " + selectedFile);
+
+                // 执行你的 Excel 文件操作
+                // 例如，可以使用 Microsoft.Office.Interop.Excel 来读取和操作 Excel 文件
+                Application excelApp = new Application();
+                Workbook excelWorkbook = excelApp.Workbooks.Open(selectedFile);
+                Worksheet excelWorksheet = excelWorkbook.ActiveSheet;
+                // 在这里进行你的操作
+                excelWorkbook.Close();
+                excelApp.Quit();
+            }
+        }
+    }
+}
