@@ -1,47 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>你好, CSL</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        button {
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>经典Web开发程序</title>
+<style>
+  /* 在这里添加CSS样式 */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  #show-date {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
 </head>
 <body>
-    <h1>Hello, World Popup</h1>
-    <button onclick="showHelloPopup()">Click me!</button>
-    <!-- 添加文件上传按钮 -->
-    <input type="file" id="fileInput" style="display: none;" accept=".xlsx">
-    <button onclick="uploadExcel()">Upload Excel File</button>
 
-    <script>
-        function showHelloPopup() {
-            alert('Hello, World!');
-        }
+<h1>欢迎来到我的网页</h1>
+<button id="show-date">点击显示日期和时间</button>
 
-        function uploadExcel() {
-            // 触发文件上传按钮的点击事件
-            document.getElementById('fileInput').click();
-        }
+<script>
+  // 在这里添加JavaScript代码
+  document.getElementById('show-date').addEventListener('click', function() {
+    var currentDate = new Date();
+    alert('当前日期和时间是：' + currentDate);
+  });
+</script>
 
-        // 当用户选择文件后，执行这个函数
-        document.getElementById('fileInput').addEventListener('change', function() {
-            var file = this.files[0]; // 获取用户选择的文件
-            if (file) {
-                // 这里可以使用 FileReader 对象来读取文件内容，然后进行相应的操作
-                alert('Selected file: ' + file.name);
-            }
-        });
-    </script>
 </body>
 </html>
