@@ -1,40 +1,38 @@
-using System;
-using System.Windows.Forms;
-using Microsoft.Office.Interop.Excel;
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>经典Web开发程序</title>
+<style>
+  /* 在这里添加CSS样式 */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  #show-date {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
 
-namespace ExcelFileUploader
-{
-    public partial class MainForm : Form
-    {
-        public MainForm()
-        {
-            InitializeComponent();
-        }
+<h1>欢迎来到我的网页</h1>
+<button id="show-date">点击显示日期和时间</button>
 
-        private void showHelloPopupButton_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Hello, World!");
-        }
+<script>
+  // 在这里添加JavaScript代码
+  document.getElementById('show-date').addEventListener('click', function() {
+    var currentDate = new Date();
+    alert('当前日期和时间是：' + currentDate);
+  });
+</script>
 
-        private void uploadExcelButton_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
-            openFileDialog.Title = "Select an Excel File";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string selectedFile = openFileDialog.FileName;
-                MessageBox.Show("Selected file: " + selectedFile);
-
-                // 执行你的 Excel 文件操作
-                // 例如，可以使用 Microsoft.Office.Interop.Excel 来读取和操作 Excel 文件
-                Application excelApp = new Application();
-                Workbook excelWorkbook = excelApp.Workbooks.Open(selectedFile);
-                Worksheet excelWorksheet = excelWorkbook.ActiveSheet;
-                // 在这里进行你的操作
-                excelWorkbook.Close();
-                excelApp.Quit();
-            }
-        }
-    }
-}
+</body>
+</html>
