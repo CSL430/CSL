@@ -58,11 +58,10 @@ function calculateLoan(amount, annualRate, years) {
 
     // 等额本金计算
     var remainingAmount = amount;
-    for (var month = 1; month <= years * 12; month++) {
+    var month = 1; 
         var interest = remainingAmount * monthlyRate;
-        monthlyPayment2 = Math.min(interest, remainingAmount);
-        remainingAmount -= interest;
-    }
+        monthlyPayment2 =amount/(years * 12)+interest;
+        
     
     return {
         amortized: (monthlyPayment1 * 10000).toFixed(1),
