@@ -60,7 +60,7 @@ function calculateLoan(amount, annualRate, years) {
     var remainingAmount = amount;
     for (var month = 1; month <= years * 12; month++) {
         var interest = remainingAmount * monthlyRate;
-        monthlyPayment2 += Math.min(interest, remainingAmount);
+        monthlyPayment2 = Math.min(interest, remainingAmount);
         remainingAmount -= interest;
     }
     
