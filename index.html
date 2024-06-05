@@ -1,90 +1,60 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Web Page</title>
-    <!-- 内联CSS样式 -->
-    <style>
-        /* 设置body的全局样式，包括字体、背景颜色、边距和填充 */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* 使内容在视窗高度居中 */
-        }
+<meta charset="UTF-8">
+<title>贷款月供计算器</title>
+<script>
+// 贷款计算函数
+function calculateLoan(amount, annualRate, months) {
+    var monthlyRate = annualRate / 1200; // 转换为月利率
+    var monthlyPayment1 = 0, monthlyPayment2 = 0;
 
-        /* 设置容器的样式，包括背景颜色、内边距、边框和阴影 */
-        .container {
-            text-align: center; /* 使容器内的文本居中 */
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
-        }
+    // 等额本息计算
+    monthlyPayment1 = amount * monthlyRate / (1 - Math.pow((1 + monthlyRate), -months));
 
-        /* 设置标题的样式 */
-        h1 {
-            color: #333;
-        }
+    // 等额本金计算
+    var remainingAmount = amount;
+    for (var i = 1; i <= months; i++) {
+        var interest = remainingAmount * monthlyRate;
+        monthlyPayment2 += Math.min(interest, remainingAmount);
+        remainingAmount -= interest;
+    }
+    
+    return {
+        amortized: monthlyPayment1.toFixed(2),
+        principal: monthlyPayment2.toFixed(2)
+    };
+}
 
-        /* 设置按钮的样式，包括填充、字体大小、指针和背景颜色 */
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer; /* 鼠标悬停时显示为手型 */
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
+// 处理表单提交
+function handleSubmit(event) {
+    event.preventDefault();
+    var amount = parseFloat(document.getElementById('loanAmount').value);
+    var annualRate = parseFloat(document.getElementById('annualRate').value);
+    var months = parseInt(document.getElementById('loanTerm').value);
 
-        /* 鼠标悬停按钮时的背景颜色 */
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        /* 隐藏元素的样式 */
-        .hidden {
-            display: none;
-        }
-
-        /* 消息文本的样式 */
-        #message {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #28a745;
-        }
-    </style>
+    var results = calculateLoan(amount, annualRate, months);
+    document.getElementById('amortizedResult').innerText = '等额本息月供： ' + results.amortized;
+    document.getElementById('principalResult').innerText = '等额本金月供： ' + results.principal;
+}
+</script>
 </head>
 <body>
-    <!-- 网页内容容器 -->
-    <div class="container">
-        <!-- 页面标题 -->
-        <h1>Welcome to My Simple Web Page</h1>
-        <!-- 点击按钮 -->
-        <button id="myButton">Click Me</button>
-        <!-- 隐藏消息文本 -->
-        <p id="message" class="hidden">Hello, you clicked the button!</p>
-    </div>
-    <!-- 内联JavaScript脚本 -->
-    <script>
-        // 当DOM内容加载完毕后执行
-        document.addEventListener('DOMContentLoaded', () => {
-            // 获取按钮和消息元素
-            const button = document.getElementById('myButton');
-            const message = document.getElementById('message');
+<h1>贷款月供计算器</h1>
+<form onsubmit="handleSubmit(event)">
+    <label for="loanAmount">贷款金额（万元）:</label>
+    <input type="number" id="loanAmount" step="0.01" required>
+    <br><br>
+    <label for="annualRate">贷款年利率（%）:</label>
+    <input type="number" id="annualRate" step="0.01" required>
+    <br><br>
+    <label for="loanTerm">贷款月数（最大360个月）:</label>
+    <input type="number" id="loanTerm" min="1" max="360" required>
+    <br><br>
+    <input type="submit" value="计算">
+</form>
 
-            // 为按钮添加点击事件监听器
-            button.addEventListener('click', () => {
-                // 切换消息元素的显示状态
-                message.classList.toggle('hidden');
-            });
-        });
-    </script>
+<p id="amortizedResult"></p>
+<p id="principalResult"></p>
 </body>
 </html>
