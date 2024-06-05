@@ -57,7 +57,7 @@
 <body>
 <h1>Loan Monthly Payment Calculator</h1>
 <form id="loanForm">
-    <label for="loanAmount">Loan Amount (in万元):</label>
+    <label for="loanAmount">Loan Amount (in 万元):</label>
     <input type="number" id="loanAmount" name="loanAmount" required>
 
     <label for="annualRate">Annual Interest Rate (%):</label>
@@ -81,13 +81,12 @@ function calculateLoanPayments() {
     const annualRate = document.getElementById('annualRate').value / 100; // 转换为小数
     const loanTerm = document.getElementById('loanTerm').value;
     const monthlyRate = annualRate / 12;
+
+    // 等额本息计算
     const monthlyPaymentAmortized = (loanAmount * monthlyRate * (1 + monthlyRate)^(loanTerm * 12)) / ((1 + monthlyRate)^(loanTerm * 12) - 1);
     const totalPaymentAmortized = monthlyPaymentAmortized * loanTerm * 12;
     const totalInterestAmortized = totalPaymentAmortized - loanAmount;
 
     // 等额本金计算
     let monthlyPaymentPrincipal = loanAmount * monthlyRate;
-    let totalPaymentPrincipal = 0;
-    let totalInterestPrincipal = 0;
-    let principalRemaining = loanAmount;
-    let monthlyPaymentPrincipalCalculated
+    let totalPay
