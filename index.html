@@ -1,38 +1,90 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>经典Web开发程序</title>
-<style>
-  /* 在这里添加CSS样式 */
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f4f4f4;
-  }
-  #show-date {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web Page</title>
+    <!-- 内联CSS样式 -->
+    <style>
+        /* 设置body的全局样式，包括字体、背景颜色、边距和填充 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 使内容在视窗高度居中 */
+        }
+
+        /* 设置容器的样式，包括背景颜色、内边距、边框和阴影 */
+        .container {
+            text-align: center; /* 使容器内的文本居中 */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+        }
+
+        /* 设置标题的样式 */
+        h1 {
+            color: #333;
+        }
+
+        /* 设置按钮的样式，包括填充、字体大小、指针和背景颜色 */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer; /* 鼠标悬停时显示为手型 */
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* 鼠标悬停按钮时的背景颜色 */
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 隐藏元素的样式 */
+        .hidden {
+            display: none;
+        }
+
+        /* 消息文本的样式 */
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #28a745;
+        }
+    </style>
 </head>
 <body>
+    <!-- 网页内容容器 -->
+    <div class="container">
+        <!-- 页面标题 -->
+        <h1>Welcome to My Simple Web Page</h1>
+        <!-- 点击按钮 -->
+        <button id="myButton">Click Me</button>
+        <!-- 隐藏消息文本 -->
+        <p id="message" class="hidden">Hello, you clicked the button!</p>
+    </div>
+    <!-- 内联JavaScript脚本 -->
+    <script>
+        // 当DOM内容加载完毕后执行
+        document.addEventListener('DOMContentLoaded', () => {
+            // 获取按钮和消息元素
+            const button = document.getElementById('myButton');
+            const message = document.getElementById('message');
 
-<h1>欢迎来到我的网页</h1>
-<button id="show-date">点击显示日期和时间</button>
-
-<script>
-  // 在这里添加JavaScript代码
-  document.getElementById('show-date').addEventListener('click', function() {
-    var currentDate = new Date();
-    alert('当前日期和时间是：' + currentDate);
-  });
-</script>
-
+            // 为按钮添加点击事件监听器
+            button.addEventListener('click', () => {
+                // 切换消息元素的显示状态
+                message.classList.toggle('hidden');
+            });
+        });
+    </script>
 </body>
 </html>
